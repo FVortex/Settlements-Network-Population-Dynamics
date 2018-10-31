@@ -49,15 +49,19 @@ y_6_clusts <- fit_6_clusts$points[, 2]
 
 ```{r MDS plots}
 #showing only part of villages names
-inds <- seq(1, to = length(village_names), by = 5)
+inds <- seq(1, to = length(village_names), by = 1)
 # #par(mfrow = c(2,1))
+png('/home/jane/Документы/Misha/sheludkov/Settlements-Network-Population-Dynamics/MDS_18_clusters_plot_all_labels.png', width = 1500, height = 1500, res = 250)
 plot(x_18_clusts, y_18_clusts, pch = 19, xlim = range(x_18_clusts), col = clusts_18_colors, main = 'Multidimensional Scaling Visualization\n for 18 Clusters (2002 Data)')
-text(x_18_clusts[inds], y_18_clusts[inds], pos = 4, labels = village_names[inds], cex = 0.5, col = 1)
+text(x_18_clusts[inds], y_18_clusts[inds], pos = rep(1:4, length(village_names)/4), labels = village_names[inds], cex = 0.2, col = 1)
+dev.off()
 
 #legend('topright', legend = paste('Cluster', 1:18), col = rainbow(18), lty = 1, cex= 0.5)
+png('/home/jane/Документы/Misha/sheludkov/Settlements-Network-Population-Dynamics/MDS_6_clusters_plot_all_labels.png', width = 1500, height = 1500, res = 250)
 plot(x_6_clusts, y_6_clusts, pch = 19, xlim = range(x_6_clusts), col = clusts_6_colors, main = 'Multidimensional Scaling Visualization\n for 6 Clusters (2002 Data)')
-text(x_6_clusts[inds], y_6_clusts[inds], pos = 4, labels = village_names[inds], cex = 0.5, col =1)
+text(x_18_clusts[inds], y_18_clusts[inds], pos = rep(1:4, length(village_names)/4), labels = village_names[inds], cex = 0.2, col = 1)
 #legend('topright', legend = paste('Cluster', 1:6), col = rainbow(6), lty = 1, cex= 0.5)
+dev.off()
 
 
 ```
@@ -69,8 +73,13 @@ tsne <- Rtsne(as.dist(dist_matrix_2002), dims = 2, perplexity=30, verbose=TRUE, 
 
 ## Plotting
 # #par(mfrow = c(2,1))
+png('/home/jane/Документы/Misha/sheludkov/Settlements-Network-Population-Dynamics/tSNE_6_clusters_plot_all_labels.png', width = 1500, height = 1500, res = 250)
 plot(tsne$Y, t='p',  col=clusts_18_colors, cex = 1, main = 't-SNE Visualization\n for 18 Clusters (2002 Data)')
-text(tsne$Y[inds,], pos = 4, labels=village_names[inds], col=1, cex = 0.5)
+text(tsne$Y[inds,], pos = rep(1:4, length(village_names)/4), labels=village_names[inds], col=1, cex = 0.3)
+dev.off()
+
+png('/home/jane/Документы/Misha/sheludkov/Settlements-Network-Population-Dynamics/tSNE_18_clusters_plot_all_labels.png', width = 1500, height = 1500, res = 250)
 plot(tsne$Y, t='p',  col=clusts_6_colors, cex = 1, main = 't-SNE Visualization\n for 6 Clusters (2002 Data)')
-text(tsne$Y[inds,], pos = 4, labels=village_names[inds], col=1, cex = 0.5)
+text(tsne$Y[inds,], pos = rep(1:4, length(village_names)/4), labels=village_names[inds], col=1, cex = 0.3)
+dev.off()
 ```
